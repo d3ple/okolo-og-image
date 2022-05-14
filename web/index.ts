@@ -15,7 +15,7 @@ const ImagePreview = ({ src, onclick, onload, onerror, loading }: ImagePreviewPr
         filter: loading ? 'blur(5px)' : '',
         opacity: loading ? 0.1 : 1,
     };
-    const title = 'Click to copy image URL to clipboard';
+    const title = 'Нажми, чтобы скопировать ссылку на изображение';
     return H('a',
         { className: 'image-wrapper', href: src, onclick },
         H('img',
@@ -124,8 +124,9 @@ const Toast = ({ show, message }: ToastProps) => {
 }
 
 const themeOptions: DropdownOption[] = [
-    { text: 'Light', value: 'light' },
-    { text: 'Dark', value: 'dark' },
+    { text: 'Светлая', value: 'light' },
+    // { text: 'Темная', value: 'dark' },
+    { text: 'Место', value: 'place' },
 ];
 
 const fileTypeOptions: DropdownOption[] = [
@@ -145,16 +146,13 @@ const markdownOptions: DropdownOption[] = [
 ];
 
 const imageLightOptions: DropdownOption[] = [
-    { text: 'Vercel', value: 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg' },
-    { text: 'Next.js', value: 'https://assets.vercel.com/image/upload/front/assets/design/nextjs-black-logo.svg' },
-    { text: 'Hyper', value: 'https://assets.vercel.com/image/upload/front/assets/design/hyper-color-logo.svg' },
+    { text: 'okolo лого', value: 'https://okolo.city/storage/logo/logo.svg' },
+    { text: 'okolo лого и название', value: 'https://okolo.city/storage/logo/logo-w-title-horizontal.svg' },
+    { text: 'okolo лого и девиз', value: 'https://okolo.city/storage/logo/logo-w-subtitle-horizontal.svg' },
 ];
 
 const imageDarkOptions: DropdownOption[] = [
-
-    { text: 'Vercel', value: 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-white.svg' },
-    { text: 'Next.js', value: 'https://assets.vercel.com/image/upload/front/assets/design/nextjs-white-logo.svg' },
-    { text: 'Hyper', value: 'https://assets.vercel.com/image/upload/front/assets/design/hyper-bw-logo.svg' },
+    { text: 'okolo лого', value: 'https://okolo.city/storage/logo/logo.svg' },
 ];
 
 
@@ -221,7 +219,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
             { className: 'pull-left' },
             H('div',
                 H(Field, {
-                    label: 'Theme',
+                    label: 'Тема',
                     input: H(Dropdown, {
                         options: themeOptions,
                         value: theme,
@@ -234,7 +232,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                     })
                 }),
                 H(Field, {
-                    label: 'File Type',
+                    label: 'Тип файла',
                     input: H(Dropdown, {
                         options: fileTypeOptions,
                         value: fileType,
@@ -242,7 +240,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                     })
                 }),
                 H(Field, {
-                    label: 'Font Size',
+                    label: 'Размер шрифта',
                     input: H(Dropdown, {
                         options: fontSizeOptions,
                         value: fontSize,
@@ -250,7 +248,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                     })
                 }),
                 H(Field, {
-                    label: 'Text Type',
+                    label: 'Формат текста',
                     input: H(Dropdown, {
                         options: markdownOptions,
                         value: mdValue,
@@ -258,7 +256,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                     })
                 }),
                 H(Field, {
-                    label: 'Text Input',
+                    label: 'Текст',
                     input: H(TextInput, {
                         value: text,
                         oninput: (val: string) => {
@@ -268,7 +266,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                     })
                 }),
                 H(Field, {
-                    label: 'Image 1',
+                    label: 'Изображение 1',
                     input: H('div',
                         H(Dropdown, {
                             options: imageOptions,
@@ -285,7 +283,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                             H(TextInput, {
                                 value: widths[0],
                                 type: 'number',
-                                placeholder: 'width',
+                                placeholder: 'ширина',
                                 small: true,
                                 oninput: (val: string) =>  {
                                     let clone = [...widths];
@@ -296,7 +294,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                             H(TextInput, {
                                 value: heights[0],
                                 type: 'number',
-                                placeholder: 'height',
+                                placeholder: 'высота',
                                 small: true,
                                 oninput: (val: string) =>  {
                                     let clone = [...heights];
@@ -308,7 +306,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                     ),
                 }),
                 ...images.slice(1).map((image, i) => H(Field, {
-                    label: `Image ${i + 2}`,
+                    label: `Изображение ${i + 2}`,
                     input: H('div',
                         H(TextInput, {
                             value: image,
@@ -323,7 +321,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                             H(TextInput, {
                                 value: widths[i + 1],
                                 type: 'number',
-                                placeholder: 'width',
+                                placeholder: 'ширина',
                                 small: true,
                                 oninput: (val: string) =>  {
                                     let clone = [...widths];
@@ -334,7 +332,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                             H(TextInput, {
                                 value: heights[i + 1],
                                 type: 'number',
-                                placeholder: 'height',
+                                placeholder: 'высота',
                                 small: true,
                                 oninput: (val: string) =>  {
                                     let clone = [...heights];
@@ -346,7 +344,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                         H('div',
                             { className: 'field-flex' },
                             H(Button, {
-                                label: `Remove Image ${i + 2}`,
+                                label: `Удалить изображение ${i + 2}`,
                                 onclick: (e: MouseEvent) => {
                                     e.preventDefault();
                                     const filter = (arr: any[]) => [...arr].filter((_, n) => n !== i + 1);
@@ -360,12 +358,12 @@ const App = (_: any, state: AppState, setState: SetState) => {
                     )
                 })),
                 H(Field, {
-                    label: `Image ${images.length + 1}`,
+                    label: `Изображение ${images.length + 1}`,
                     input: H(Button, {
-                        label: `Add Image ${images.length + 1}`,
+                        label: `Добавить изображение ${images.length + 1}`,
                         onclick: () => {
                             const nextImage = images.length === 1
-                                ? 'https://cdn.jsdelivr.net/gh/remojansen/logo.ts@master/ts.svg'
+                                ? 'https://kemerovo.kuzbass-online.ru/static-web/images/logos/logo-main.png'
                                 : '';
                             setLoadingState({ images: [...images, nextImage] })
                         }
@@ -380,14 +378,14 @@ const App = (_: any, state: AppState, setState: SetState) => {
                 loading: loading,
                 onload: () => setState({ loading: false }),
                 onerror: () => {
-                    setState({ showToast: true, messageToast: 'Oops, an error occurred' });
+                    setState({ showToast: true, messageToast: 'Ой, произошла ошибка' });
                     setTimeout(() => setState({ showToast: false }), 2000);
                 },
                 onclick: (e: Event) => {
                     e.preventDefault();
                     const success = copee.toClipboard(url.href);
                     if (success) {
-                        setState({ showToast: true, messageToast: 'Copied image URL to clipboard' });
+                        setState({ showToast: true, messageToast: 'Ссылка на изображение скопирована в буфер обмена' });
                         setTimeout(() => setState({ showToast: false }), 3000);
                     } else {
                         window.open(url.href, '_blank');
