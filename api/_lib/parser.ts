@@ -1,12 +1,22 @@
 import { IncomingMessage } from 'http';
 import { parse } from 'url';
-// import { ParsedRequest, Theme } from './types';
-import { ParsedRequest } from './types';
+import { ParsedRequest, Params } from './types';
 
 export function parseRequest(req: IncomingMessage) {
     console.log('HTTP ' + req.url);
     const { pathname, query } = parse(req.url || '/', true);
-    const { fontSize, images, widths, heights, theme, md, placeTitle = "", placeRegion = '' } = (query || {});
+    const { 
+        fontSize, 
+        images, 
+        widths, 
+        heights, 
+        theme = 'light', 
+        md, 
+        placeTitle = "Название места", 
+        placeRegion = "Регион",
+        postTitle = "Название поста", 
+        postType = 'Пост',
+    }: any = (query || {});
 
     if (Array.isArray(fontSize)) {
         throw new Error('Expected a single fontSize');
@@ -30,14 +40,16 @@ export function parseRequest(req: IncomingMessage) {
     const parsedRequest: ParsedRequest = {
         fileType: extension === 'jpeg' ? extension : 'png',
         text: decodeURIComponent(text),
-        placeTitle: decodeURIComponent(Array.isArray(placeTitle) ? placeTitle[0] : placeTitle ),
-        placeRegion: decodeURIComponent(Array.isArray(placeRegion) ? placeRegion[0] : placeRegion),
-        theme: theme || 'light',
+        theme: theme,
         md: md === '1' || md === 'true',
         fontSize: fontSize || '96px',
         images: getArray(images),
         widths: getArray(widths),
         heights: getArray(heights),
+        placeTitle: decodeURIComponent(Array.isArray(placeTitle) ? placeTitle[0] : placeTitle ),
+        placeRegion: decodeURIComponent(Array.isArray(placeRegion) ? placeRegion[0] : placeRegion),
+        postTitle: decodeURIComponent(Array.isArray(postTitle) ? postTitle[0] : postTitle ),
+        postType: decodeURIComponent(Array.isArray(postType) ? postType[0] : postType),
     };
     parsedRequest.images = getDefaultImages(parsedRequest.images, parsedRequest.theme);
     return parsedRequest;
