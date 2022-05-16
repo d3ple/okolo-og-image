@@ -1,63 +1,15 @@
 body {
-  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
-    "Arial", sans-serif;
-  margin: 20px;
-  overflow-x: hidden;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
 }
 
-a {
-    cursor: pointer;
-    color: #0076FF;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    border-bottom: 1px solid white;
-}
-
-a:hover {
-    border-bottom: 1px solid #0076FF;
-}
-
-footer {
-    opacity: 0.5;
-    font-size: 0.8em;
-}
-
-.center, h1 {
-    text-align: center;
-}
-
-.editor-title {
-    font-family: 'Rubik', sans-serif;
-    font-size: 48px;
-    line-height: 1.2;
-    margin-bottom: 80px;
-    font-weight: bold;
-}
-
-.container {
+.app-container {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100vh;
-    align-items: center;
-}
-
-.split {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.pull-left {
-    /* min-width: 50%; */
-    /* display: flex; */
-    /* justify-content: flex-end; */
-}
-
-.pull-right {
-    width: 50%;
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px 5rem;
 }
 
 button {
@@ -224,14 +176,12 @@ select {
 }
 
 .field-value {
-    margin: 10px 80px;
+    /* margin: 10px 80px; */
 }
 
 .field-label {
     display: inline-block;
-    width: 100px;
-    margin-right: 20px;
-    text-align: right;
+    font-size: 14px;
 }
 
 .field-value {
@@ -241,7 +191,8 @@ select {
 
 label {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    row-gap: 2px;
 }
 
 .toast-area {
@@ -330,39 +281,6 @@ img {
         width: 60px;
         font-size: 13px;
     }
-}
-
-.github-corner:hover .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-}
-
-@keyframes octocat-wave {
-    0%,100% { transform:rotate(0) }
-    20%,60% { transform:rotate(-25deg) }
-    40%,80% { transform:rotate(10deg) }
-}
-
-@media (max-width: 500px) {
-  .github-corner:hover .octo-arm {
-    animation: none;
-  }
-  .github-corner .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
-  .container {
-    margin: 19%;
-  }
-  .svg {
-    right: -33%;
-  }
-}
-@media (max-width: 360px) {
-  .container {
-    margin: 29.5%;
-  }
-  .svg {
-    right: -52%;
-  }
 }
 
 input[type=number]::-webkit-inner-spin-button, 

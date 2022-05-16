@@ -77,14 +77,14 @@ const TextInput = ({ value, oninput, small, type = 'text', placeholder = '' }: T
     );
 }
 
-interface ButtonProps {
-    label: string;
-    onclick: () => void;
-}
+// interface ButtonProps {
+//     label: string;
+//     onclick: () => void;
+// }
 
-const Button = ({ label, onclick }: ButtonProps) => {
-    return H('button', { onclick }, label);
-}
+// const Button = ({ label, onclick }: ButtonProps) => {
+//     return H('button', { onclick }, label);
+// }
 
 interface FieldProps {
     label: string;
@@ -186,7 +186,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
         fontSize = '100px',
         theme = 'light',
         md = true,
-        text = '**Hello** World',
+        text = '**og:image** для **okolo.city**',
         images=[imageLightOptions[0].value],
         widths=[],
         heights=[],
@@ -198,7 +198,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
     } = state;
 
     const mdValue = md ? '1' : '0';
-    const imageOptions = theme === 'light' ? imageLightOptions : imageDarkOptions;
+    // const imageOptions = theme === 'light' ? imageLightOptions : imageDarkOptions;
     const url = new URL(window.location.origin);
     url.pathname = `${encodeURIComponent(text)}.${fileType}`;
     url.searchParams.append('theme', theme);
@@ -215,10 +215,9 @@ const App = (_: any, state: AppState, setState: SetState) => {
     }
 
     return H('div',
-        { className: 'split' },
         H('div',
-            { className: 'pull-left' },
-            H('div',
+            { className: 'inputs mb-8' },
+            H('div', { className: 'flex flex-wrap gap-x-6 gap-y-3' },
                 H(Field, {
                     label: 'Тема',
                     input: H(Dropdown, {
@@ -266,114 +265,116 @@ const App = (_: any, state: AppState, setState: SetState) => {
                         }
                     })
                 }),
-                H(Field, {
-                    label: 'Изображение 1',
-                    input: H('div',
-                        H(Dropdown, {
-                            options: imageOptions,
-                            value: imageOptions[selectedImageIndex].value,
-                            onchange: (val: string) =>  {
-                                let clone = [...images];
-                                clone[0] = val;
-                                const selected = imageOptions.map(o => o.value).indexOf(val);
-                                setLoadingState({ images: clone, selectedImageIndex: selected });
-                            }
-                        }),
-                        H('div',
-                            { className: 'field-flex' },
-                            H(TextInput, {
-                                value: widths[0],
-                                type: 'number',
-                                placeholder: 'ширина',
-                                small: true,
-                                oninput: (val: string) =>  {
-                                    let clone = [...widths];
-                                    clone[0] = val;
-                                    setLoadingState({ widths: clone });
-                                }
-                            }),
-                            H(TextInput, {
-                                value: heights[0],
-                                type: 'number',
-                                placeholder: 'высота',
-                                small: true,
-                                oninput: (val: string) =>  {
-                                    let clone = [...heights];
-                                    clone[0] = val;
-                                    setLoadingState({ heights: clone });
-                                }
-                            })
-                        )
-                    ),
-                }),
-                ...images.slice(1).map((image, i) => H(Field, {
-                    label: `Изображение ${i + 2}`,
-                    input: H('div',
-                        H(TextInput, {
-                            value: image,
-                            oninput: (val: string) => {
-                                let clone = [...images];
-                                clone[i + 1] = val;
-                                setLoadingState({ images: clone, overrideUrl: url });
-                            }
-                        }),
-                        H('div',
-                            { className: 'field-flex' },
-                            H(TextInput, {
-                                value: widths[i + 1],
-                                type: 'number',
-                                placeholder: 'ширина',
-                                small: true,
-                                oninput: (val: string) =>  {
-                                    let clone = [...widths];
-                                    clone[i + 1] = val;
-                                    setLoadingState({ widths: clone });
-                                }
-                            }),
-                            H(TextInput, {
-                                value: heights[i + 1],
-                                type: 'number',
-                                placeholder: 'высота',
-                                small: true,
-                                oninput: (val: string) =>  {
-                                    let clone = [...heights];
-                                    clone[i + 1] = val;
-                                    setLoadingState({ heights: clone });
-                                }
-                            })
-                        ),
-                        H('div',
-                            { className: 'field-flex' },
-                            H(Button, {
-                                label: `Удалить изображение ${i + 2}`,
-                                onclick: (e: MouseEvent) => {
-                                    e.preventDefault();
-                                    const filter = (arr: any[]) => [...arr].filter((_, n) => n !== i + 1);
-                                    const imagesClone = filter(images);
-                                    const widthsClone = filter(widths);
-                                    const heightsClone = filter(heights);
-                                    setLoadingState({ images: imagesClone, widths: widthsClone, heights: heightsClone });
-                                }
-                            })
-                        )
-                    )
-                })),
-                H(Field, {
-                    label: `Изображение ${images.length + 1}`,
-                    input: H(Button, {
-                        label: `Добавить изображение ${images.length + 1}`,
-                        onclick: () => {
-                            const nextImage = images.length === 1
-                                ? 'https://kemerovo.kuzbass-online.ru/static-web/images/logos/logo-main.png'
-                                : '';
-                            setLoadingState({ images: [...images, nextImage] })
-                        }
-                    }),
-                }),
+                // H(Field, {
+                //     label: 'Изображение 1',
+                //     input: H('div',
+                //         H(Dropdown, {
+                //             options: imageOptions,
+                //             value: imageOptions[selectedImageIndex].value,
+                //             onchange: (val: string) =>  {
+                //                 let clone = [...images];
+                //                 clone[0] = val;
+                //                 const selected = imageOptions.map(o => o.value).indexOf(val);
+                //                 setLoadingState({ images: clone, selectedImageIndex: selected });
+                //             }
+                //         }),
+                //         H('div',
+                //             { className: 'field-flex' },
+                //             H(TextInput, {
+                //                 value: widths[0],
+                //                 type: 'number',
+                //                 placeholder: 'ширина',
+                //                 small: true,
+                //                 oninput: (val: string) =>  {
+                //                     let clone = [...widths];
+                //                     clone[0] = val;
+                //                     setLoadingState({ widths: clone });
+                //                 }
+                //             }),
+                //             H(TextInput, {
+                //                 value: heights[0],
+                //                 type: 'number',
+                //                 placeholder: 'высота',
+                //                 small: true,
+                //                 oninput: (val: string) =>  {
+                //                     let clone = [...heights];
+                //                     clone[0] = val;
+                //                     setLoadingState({ heights: clone });
+                //                 }
+                //             })
+                //         )
+                //     ),
+                // }),
+                // ...images.slice(1).map((image, i) => H(Field, {
+                //     label: `Изображение ${i + 2}`,
+                //     input: H('div',
+                //         H(TextInput, {
+                //             value: image,
+                //             oninput: (val: string) => {
+                //                 let clone = [...images];
+                //                 clone[i + 1] = val;
+                //                 setLoadingState({ images: clone, overrideUrl: url });
+                //             }
+                //         }),
+                //         H('div',
+                //             { className: 'field-flex' },
+                //             H(TextInput, {
+                //                 value: widths[i + 1],
+                //                 type: 'number',
+                //                 placeholder: 'ширина',
+                //                 small: true,
+                //                 oninput: (val: string) =>  {
+                //                     let clone = [...widths];
+                //                     clone[i + 1] = val;
+                //                     setLoadingState({ widths: clone });
+                //                 }
+                //             }),
+                //             H(TextInput, {
+                //                 value: heights[i + 1],
+                //                 type: 'number',
+                //                 placeholder: 'высота',
+                //                 small: true,
+                //                 oninput: (val: string) =>  {
+                //                     let clone = [...heights];
+                //                     clone[i + 1] = val;
+                //                     setLoadingState({ heights: clone });
+                //                 }
+                //             })
+                //         ),
+                //         H('div',
+                //             { className: 'field-flex' },
+                //             H(Button, {
+                //                 label: `Удалить изображение ${i + 2}`,
+                //                 onclick: (e: MouseEvent) => {
+                //                     e.preventDefault();
+                //                     const filter = (arr: any[]) => [...arr].filter((_, n) => n !== i + 1);
+                //                     const imagesClone = filter(images);
+                //                     const widthsClone = filter(widths);
+                //                     const heightsClone = filter(heights);
+                //                     setLoadingState({ images: imagesClone, widths: widthsClone, heights: heightsClone });
+                //                 }
+                //             })
+                //         )
+                //     )
+                // })),
+                // H(Field, {
+                //     label: `Изображение ${images.length + 1}`,
+                //     input: H(Button, {
+                //         label: `Добавить изображение ${images.length + 1}`,
+                //         onclick: () => {
+                //             const nextImage = images.length === 1
+                //                 ? 'https://kemerovo.kuzbass-online.ru/static-web/images/logos/logo-main.png'
+                //                 : '';
+                //             setLoadingState({ images: [...images, nextImage] })
+                //         }
+                //     }),
+                // }),
             )
         ),
+        
         H('div',
-            { className: 'pull-right' },
+            { className: 'preview' },
+            H('p', { className: "text-lg mb-3"}, 'Превью:'),
             H(ImagePreview, {
                 src: overrideUrl ? overrideUrl.href : url.href,
                 loading: loading,
