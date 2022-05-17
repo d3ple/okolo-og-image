@@ -222,7 +222,7 @@ function getCss(theme: string, fontSize: string) {
 
     .post-title {
         font-size: 100px;
-        line-height: 1.05;
+        line-height: 1.1;
         font-weight: bold;
         margin: 0px;
         text-align: center;
